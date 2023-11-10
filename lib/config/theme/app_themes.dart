@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData theme() {
   return ThemeData(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: const Color(0xfff6f8fb),
     fontFamily: 'Mulish',
     appBarTheme: appBarTheme(),
   );
@@ -10,7 +10,7 @@ ThemeData theme() {
 
 AppBarTheme appBarTheme() {
   return const AppBarTheme(
-      color: Colors.white,
+      color: Color(0xfff6f8fb),
       elevation: 0,
       centerTitle: true,
       iconTheme: IconThemeData(color: Color(0XFF8b8b8b)),

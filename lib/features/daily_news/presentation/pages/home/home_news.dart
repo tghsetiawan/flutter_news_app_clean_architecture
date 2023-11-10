@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news_app_clean_architecture/features/daily_news/domain/entities/article.dart';
 import 'package:flutter_news_app_clean_architecture/features/daily_news/presentation/bloc/remote/remote_article_bloc.dart';
 import 'package:flutter_news_app_clean_architecture/features/daily_news/presentation/widgets/article_tile.dart';
 import 'package:flutter_news_app_clean_architecture/features/daily_news/presentation/widgets/category_item.dart';
@@ -37,6 +38,9 @@ class _HomePageState extends State<HomePage> {
         'Daily News',
         style: TextStyle(
           color: Colors.black,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 3,
         ),
       ),
       actions: [
@@ -44,11 +48,15 @@ class _HomePageState extends State<HomePage> {
           onTap: () {},
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: 14),
-            child: Icon(Icons.bookmark, color: Colors.black),
+            child: Icon(Icons.flag_rounded, color: Colors.black),
           ),
         ),
       ],
     );
+  }
+
+  void _onArticlePressed(BuildContext context, ArticleEntity article) {
+    Navigator.pushNamed(context, '/ArticleDetails', arguments: article);
   }
 
   @override
@@ -115,7 +123,10 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return ArticleWidget(
                   article: state.result[index],
-                  onArticlePressed: (article) => {},
+                  onArticlePressed: (article) {
+                    print('Klik Detail Article ${article.title}');
+                    _onArticlePressed(context, article);
+                  },
                 );
               },
               itemCount: state.result.length,
@@ -133,8 +144,10 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(width: 10),
           Expanded(
             child: Container(
-              color: Colors.white,
-              height: MediaQuery.of(context).size.height * 0.05,
+              margin: const EdgeInsets.only(bottom: 10),
+              color: const Color(0xfff6f8fb),
+              // height: MediaQuery.of(context).size.height * 0.05,
+              height: 40,
               child: ListView(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
